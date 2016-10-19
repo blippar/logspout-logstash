@@ -188,7 +188,7 @@ type RancherInfo struct {
 type RancherContainer struct {
 	Name      string `json:"name"`           // io.rancher.container.name
 	UUID      string `json:"uuid"`           // io.rancher.container.uuid
-	IP        string `json:"ip"`             // io.rancher.container.ip
+	IP        string `json:"ip,omitempty"`   // io.rancher.container.ip
 	StartOnce string `json:"once,omitempty"` // io.rancher.container.start_once
 }
 
