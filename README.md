@@ -1,6 +1,8 @@
 # logspout-logstash
 
-A minimalistic adapter for github.com/gliderlabs/logspout to write to Logstash
+A minimalistic adapter for github.com/gliderlabs/logspout to write to Logstash. It also export some information about the Rancher environment it is running in if Rancher labels are available on the container as well as export all other Docker labels.
+
+All labels not prefixed by `io.rancher` will be included with the `.` separator replaced by a `_` to prevent error in Elastic.
 
 Follow the instructions in https://github.com/gliderlabs/logspout/tree/master/custom on how to build your own Logspout container with custom modules. Basically just copy the contents of the custom folder and include:
 
@@ -8,7 +10,7 @@ Follow the instructions in https://github.com/gliderlabs/logspout/tree/master/cu
 package main
 
 import (
-  _ "github.com/looplab/logspout-logstash"
+  _ "github.com/blippar/logspout-logstash-rancher"
   _ "github.com/gliderlabs/logspout/transports/udp"
   _ "github.com/gliderlabs/logspout/transports/tcp"
 )
