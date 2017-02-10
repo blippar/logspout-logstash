@@ -8,7 +8,7 @@ import (
 	"os"
 	"strings"
 
-    "github.com/fsouza/go-dockerclient"
+	"github.com/fsouza/go-dockerclient"
 	"github.com/gliderlabs/logspout/router"
 )
 
