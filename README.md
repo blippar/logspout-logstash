@@ -1,3 +1,6 @@
+[![GoDoc](https://godoc.org/github.com/looplab/logspout-logstash?status.svg)](https://godoc.org/github.com/looplab/logspout-logstash)
+[![Go Report Card](https://goreportcard.com/badge/looplab/logspout-logstash)](https://goreportcard.com/report/looplab/logspout-logstash)
+
 # logspout-logstash
 
 A minimalistic adapter for github.com/gliderlabs/logspout to write to Logstash. It also export some information about the Rancher environment it is running in if Rancher labels are available on the container as well as export all other Docker labels.
@@ -61,9 +64,26 @@ The output into logstash should be like:
     ],
 ```
 
+You can also add arbitrary logstash fields to the event using the ```LOGSTASH_FIELDS``` container environment variable:
+
+```bash
+  # Add any number of arbitrary fields to your event
+  -e LOGSTASH_FIELDS="myfield=something,anotherfield=something_else"
+```
+
+The output into logstash should be like:
+
+```json
+    "myfield": "something",
+    "another_field": "something_else",
+```
+
+Both configuration options can be set for every individual container, or for the logspout-logstash
+container itself where they then become a default for all containers if not overridden there.
 
 This table shows all available configurations:
 
 | Environment Variable | Input Type | Default Value |
 |----------------------|------------|---------------|
 | LOGSTASH_TAGS        | array      | None          |
+| LOGSTASH_FIELDS      | map        | None          |
