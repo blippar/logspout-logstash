@@ -68,7 +68,6 @@ func GetContainerTags(c *docker.Container, a *LogstashAdapter) []string {
 	return tags
 }
 
-// Get logstash fields configured with the environment variable LOGSTASH_FIELDS
 func GetLogstashFields(c *docker.Container, a *LogstashAdapter) map[string]string {
 	if fields, ok := a.logstashFields[c.ID]; ok {
 		return fields
@@ -142,9 +141,11 @@ func GetRancherInfo(c *docker.Container) *RancherInfo {
 		Full:        stackService,
 		Deployement: getLabel(c.Config.Labels, "io.rancher.service.deployment.unit"),
 	}
+	environment := os.Getenv("RANCHER_ENV")
 	rancherInfo := RancherInfo{
-		Container: container,
-		Stack:     stack,
+		Environment: environment,
+		Container:   container,
+		Stack:       stack,
 	}
 	return &rancherInfo
 }
@@ -213,8 +214,9 @@ type DockerInfo struct {
 }
 
 type RancherInfo struct {
-	Container RancherContainer `json:"container"`
-	Stack     RancherStack     `json:"stack"`
+	Environment string           `json:"environment",omitempty`
+	Container   RancherContainer `json:"container"`
+	Stack       RancherStack     `json:"stack"`
 }
 
 type RancherContainer struct {
