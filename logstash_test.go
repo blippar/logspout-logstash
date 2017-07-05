@@ -101,6 +101,7 @@ func TestStreamNullData(t *testing.T) {
 
 	var dockerInfo map[string]interface{}
 	dockerInfo = data["docker"].(map[string]interface{})
+	dockerInfo = dockerInfo["container"].(map[string]interface{})
 	assert.Equal("name", dockerInfo["name"])
 	assert.Equal("ID", dockerInfo["id"])
 	assert.Equal("image", dockerInfo["image"])
@@ -158,6 +159,7 @@ func TestStreamNotJsonWithoutLogstashTags(t *testing.T) {
 
 	var dockerInfo map[string]interface{}
 	dockerInfo = data["docker"].(map[string]interface{})
+	dockerInfo = dockerInfo["container"].(map[string]interface{})
 	assert.Equal("name", dockerInfo["name"])
 	assert.Equal("ID", dockerInfo["id"])
 	assert.Equal("image", dockerInfo["image"])
@@ -215,6 +217,7 @@ func TestStreamNotJsonWithLogstashTags(t *testing.T) {
 
 	var dockerInfo map[string]interface{}
 	dockerInfo = data["docker"].(map[string]interface{})
+	dockerInfo = dockerInfo["container"].(map[string]interface{})
 	assert.Equal("name", dockerInfo["name"])
 	assert.Equal("ID", dockerInfo["id"])
 	assert.Equal("image", dockerInfo["image"])
@@ -278,6 +281,7 @@ func TestStreamJsonWithoutLogstashTags(t *testing.T) {
 
 	var dockerInfo map[string]interface{}
 	dockerInfo = data["docker"].(map[string]interface{})
+	dockerInfo = dockerInfo["container"].(map[string]interface{})
 	assert.Equal("name", dockerInfo["name"])
 	assert.Equal("ID", dockerInfo["id"])
 	assert.Equal("image", dockerInfo["image"])
@@ -341,6 +345,7 @@ func TestStreamJsonWithLogstashTags(t *testing.T) {
 
 	var dockerInfo map[string]interface{}
 	dockerInfo = data["docker"].(map[string]interface{})
+	dockerInfo = dockerInfo["container"].(map[string]interface{})
 	assert.Equal("name", dockerInfo["name"])
 	assert.Equal("ID", dockerInfo["id"])
 	assert.Equal("image", dockerInfo["image"])
@@ -400,6 +405,7 @@ func TestStreamNotJsonWithLogstashFields(t *testing.T) {
 
 	var dockerInfo map[string]interface{}
 	dockerInfo = data["docker"].(map[string]interface{})
+	dockerInfo = dockerInfo["container"].(map[string]interface{})
 	assert.Equal("name", dockerInfo["name"])
 	assert.Equal("ID", dockerInfo["id"])
 	assert.Equal("image", dockerInfo["image"])
@@ -465,6 +471,7 @@ func TestStreamJsonWithLogstashFields(t *testing.T) {
 
 	var dockerInfo map[string]interface{}
 	dockerInfo = data["docker"].(map[string]interface{})
+	dockerInfo = dockerInfo["container"].(map[string]interface{})
 	assert.Equal("name", dockerInfo["name"])
 	assert.Equal("ID", dockerInfo["id"])
 	assert.Equal("image", dockerInfo["image"])
@@ -526,6 +533,7 @@ func TestStreamNotJsonWithLogstashFieldsWithDefault(t *testing.T) {
 
 	var dockerInfo map[string]interface{}
 	dockerInfo = data["docker"].(map[string]interface{})
+	dockerInfo = dockerInfo["container"].(map[string]interface{})
 	assert.Equal("name", dockerInfo["name"])
 	assert.Equal("ID", dockerInfo["id"])
 	assert.Equal("image", dockerInfo["image"])
@@ -593,6 +601,7 @@ func TestStreamJsonWithLogstashFieldsWithDefault(t *testing.T) {
 
 	var dockerInfo map[string]interface{}
 	dockerInfo = data["docker"].(map[string]interface{})
+	dockerInfo = dockerInfo["container"].(map[string]interface{})
 	assert.Equal("name", dockerInfo["name"])
 	assert.Equal("ID", dockerInfo["id"])
 	assert.Equal("image", dockerInfo["image"])
@@ -652,6 +661,7 @@ func TestStreamNotJsonWithLogstashTagsWithDefault(t *testing.T) {
 
 	var dockerInfo map[string]interface{}
 	dockerInfo = data["docker"].(map[string]interface{})
+	dockerInfo = dockerInfo["container"].(map[string]interface{})
 	assert.Equal("name", dockerInfo["name"])
 	assert.Equal("ID", dockerInfo["id"])
 	assert.Equal("image", dockerInfo["image"])
@@ -717,6 +727,7 @@ func TestStreamJsonWithLogstashTagsWithDefault(t *testing.T) {
 
 	var dockerInfo map[string]interface{}
 	dockerInfo = data["docker"].(map[string]interface{})
+	dockerInfo = dockerInfo["container"].(map[string]interface{})
 	assert.Equal("name", dockerInfo["name"])
 	assert.Equal("ID", dockerInfo["id"])
 	assert.Equal("image", dockerInfo["image"])
@@ -782,6 +793,7 @@ func TestStreamJsonWithLogstashFieldsAndBlacklist(t *testing.T) {
 
 	var dockerInfo map[string]interface{}
 	dockerInfo = data["docker"].(map[string]interface{})
+	dockerInfo = dockerInfo["container"].(map[string]interface{})
 	assert.Equal("name", dockerInfo["name"])
 	assert.Equal("ID", dockerInfo["id"])
 	assert.Equal("image", dockerInfo["image"])
@@ -850,6 +862,7 @@ func TestStreamJsonWithLogstashFieldsWithDefaultAndBlacklist(t *testing.T) {
 
 	var dockerInfo map[string]interface{}
 	dockerInfo = data["docker"].(map[string]interface{})
+	dockerInfo = dockerInfo["container"].(map[string]interface{})
 	assert.Equal("name", dockerInfo["name"])
 	assert.Equal("ID", dockerInfo["id"])
 	assert.Equal("image", dockerInfo["image"])
@@ -918,6 +931,7 @@ func TestStreamJsonLabelsDisabled(t *testing.T) {
 
 	var dockerInfo map[string]interface{}
 	dockerInfo = data["docker"].(map[string]interface{})
+	dockerInfo = dockerInfo["container"].(map[string]interface{})
 	assert.Equal("name", dockerInfo["name"])
 	assert.Equal("ID", dockerInfo["id"])
 	assert.Equal("image", dockerInfo["image"])
@@ -987,6 +1001,7 @@ func TestStreamJsonLabelsEnabled(t *testing.T) {
 
 	var dockerInfo map[string]interface{}
 	dockerInfo = data["docker"].(map[string]interface{})
+	dockerInfo = dockerInfo["container"].(map[string]interface{})
 	assert.Equal("name", dockerInfo["name"])
 	assert.Equal("ID", dockerInfo["id"])
 	assert.Equal("image", dockerInfo["image"])
@@ -1063,6 +1078,7 @@ func TestStreamJsonLabelsEnabledButEmpty(t *testing.T) {
 
 	var dockerInfo map[string]interface{}
 	dockerInfo = data["docker"].(map[string]interface{})
+	dockerInfo = dockerInfo["container"].(map[string]interface{})
 	assert.Equal("name", dockerInfo["name"])
 	assert.Equal("ID", dockerInfo["id"])
 	assert.Equal("image", dockerInfo["image"])

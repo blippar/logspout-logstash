@@ -140,7 +140,9 @@ func (a *LogstashAdapter) Stream(logstream chan *router.Message) {
 			data[k] = v
 		}
 
-		data["docker"] = dockerInfo
+		data["docker"] = map[string]interface{}{
+			"container": dockerInfo,
+		}
 		data["stream"] = m.Source
 		data["tags"] = tags
 
