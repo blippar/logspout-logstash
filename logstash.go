@@ -14,19 +14,19 @@ import (
 )
 
 func init() {
-	router.AdapterFactories.Register(NewLogstashAdapter, "logstash")
+	router.AdapterFactories.Register(NewAdapter, "logstash")
 }
 
-// LogstashAdapter is an adapter that streams UDP JSON to Logstash.
-type LogstashAdapter struct {
+// Adapter is an adapter that streams UDP JSON to Logstash.
+type Adapter struct {
 	conn           net.Conn
 	route          *router.Route
 	containerTags  map[string][]string
 	logstashFields map[string]map[string]string
 }
 
-// NewLogstashAdapter creates a LogstashAdapter with UDP as the default transport.
-func NewLogstashAdapter(route *router.Route) (router.LogAdapter, error) {
+// NewAdapter creates a LogstashAdapter with UDP as the default transport.
+func NewAdapter(route *router.Route) (router.LogAdapter, error) {
 	transport, found := router.AdapterTransports.Lookup(route.AdapterTransport("udp"))
 	if !found {
 		return nil, errors.New("unable to find adapter: " + route.Adapter)
@@ -36,7 +36,7 @@ func NewLogstashAdapter(route *router.Route) (router.LogAdapter, error) {
 		conn, err := transport.Dial(route.Address, route.Options)
 
 		if err == nil {
-			return &LogstashAdapter{
+			return &Adapter{
 				route:          route,
 				conn:           conn,
 				containerTags:  make(map[string][]string),
@@ -51,8 +51,8 @@ func NewLogstashAdapter(route *router.Route) (router.LogAdapter, error) {
 	}
 }
 
-// Get container tags configured with the environment variable LOGSTASH_TAGS
-func GetContainerTags(c *docker.Container, a *LogstashAdapter) []string {
+// GetContainerTags returns the list of configured tags (fetched from the LOGSTASH_TAGS environment variable)
+func GetContainerTags(c *docker.Container, a *Adapter) []string {
 	if tags, ok := a.containerTags[c.ID]; ok {
 		return tags
 	}
@@ -75,8 +75,8 @@ func GetContainerTags(c *docker.Container, a *LogstashAdapter) []string {
 	return tags
 }
 
-// Get logstash fields configured with the environment variable LOGSTASH_FIELDS
-func GetLogstashFields(c *docker.Container, a *LogstashAdapter) map[string]string {
+// GetLogstashFields returns the list of configured fields (fetched from the LOGSTASH_FIELDS environment variable)
+func GetLogstashFields(c *docker.Container, a *Adapter) map[string]string {
 	if fields, ok := a.logstashFields[c.ID]; ok {
 		return fields
 	}
@@ -104,7 +104,7 @@ func GetLogstashFields(c *docker.Container, a *LogstashAdapter) map[string]strin
 }
 
 // Stream implements the router.LogAdapter interface.
-func (a *LogstashAdapter) Stream(logstream chan *router.Message) {
+func (a *Adapter) Stream(logstream chan *router.Message) {
 
 	for m := range logstream {
 
@@ -142,6 +142,7 @@ func (a *LogstashAdapter) Stream(logstream chan *router.Message) {
 
 		data["docker"] = map[string]interface{}{
 			"container": dockerInfo,
+			"logtime":   m.Time,
 		}
 		data["stream"] = m.Source
 		data["tags"] = tags
@@ -164,14 +165,16 @@ func (a *LogstashAdapter) Stream(logstream chan *router.Message) {
 			}
 
 			if os.Getenv("RETRY_SEND") == "" {
-				log.Fatal("logstash: could not write:", err)
+				log.Fatalln("logstash: could not write:", err)
 			} else {
+				log.Println("logstash: could not write:", err)
 				time.Sleep(2 * time.Second)
 			}
 		}
 	}
 }
 
+// DockerInfo contains some of the exported information from the Docker daemon
 type DockerInfo struct {
 	Name     string            `json:"name"`
 	ID       string            `json:"id"`

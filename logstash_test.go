@@ -55,7 +55,7 @@ func TestStreamNullData(t *testing.T) {
 
 	conn := MockConn{}
 
-	adapter := LogstashAdapter{
+	adapter := Adapter{
 		route:          new(router.Route),
 		conn:           conn,
 		containerTags:  make(map[string][]string),
@@ -113,7 +113,7 @@ func TestStreamNotJsonWithoutLogstashTags(t *testing.T) {
 
 	conn := MockConn{}
 
-	adapter := LogstashAdapter{
+	adapter := Adapter{
 		route:          new(router.Route),
 		conn:           conn,
 		containerTags:  make(map[string][]string),
@@ -171,7 +171,7 @@ func TestStreamNotJsonWithLogstashTags(t *testing.T) {
 
 	conn := MockConn{}
 
-	adapter := LogstashAdapter{
+	adapter := Adapter{
 		route:          new(router.Route),
 		conn:           conn,
 		containerTags:  make(map[string][]string),
@@ -229,7 +229,7 @@ func TestStreamJsonWithoutLogstashTags(t *testing.T) {
 
 	conn := MockConn{}
 
-	adapter := LogstashAdapter{
+	adapter := Adapter{
 		route:          new(router.Route),
 		conn:           conn,
 		containerTags:  make(map[string][]string),
@@ -293,7 +293,7 @@ func TestStreamJsonWithLogstashTags(t *testing.T) {
 
 	conn := MockConn{}
 
-	adapter := LogstashAdapter{
+	adapter := Adapter{
 		route:          new(router.Route),
 		conn:           conn,
 		containerTags:  make(map[string][]string),
@@ -357,7 +357,7 @@ func TestStreamNotJsonWithLogstashFields(t *testing.T) {
 
 	conn := MockConn{}
 
-	adapter := LogstashAdapter{
+	adapter := Adapter{
 		route:          new(router.Route),
 		conn:           conn,
 		containerTags:  make(map[string][]string),
@@ -417,7 +417,7 @@ func TestStreamJsonWithLogstashFields(t *testing.T) {
 
 	conn := MockConn{}
 
-	adapter := LogstashAdapter{
+	adapter := Adapter{
 		route:          new(router.Route),
 		conn:           conn,
 		containerTags:  make(map[string][]string),
@@ -485,7 +485,7 @@ func TestStreamNotJsonWithLogstashFieldsWithDefault(t *testing.T) {
 
 	conn := MockConn{}
 
-	adapter := LogstashAdapter{
+	adapter := Adapter{
 		route:          new(router.Route),
 		conn:           conn,
 		containerTags:  make(map[string][]string),
@@ -547,7 +547,7 @@ func TestStreamJsonWithLogstashFieldsWithDefault(t *testing.T) {
 
 	conn := MockConn{}
 
-	adapter := LogstashAdapter{
+	adapter := Adapter{
 		route:          new(router.Route),
 		conn:           conn,
 		containerTags:  make(map[string][]string),
@@ -615,7 +615,7 @@ func TestStreamNotJsonWithLogstashTagsWithDefault(t *testing.T) {
 
 	conn := MockConn{}
 
-	adapter := LogstashAdapter{
+	adapter := Adapter{
 		route:          new(router.Route),
 		conn:           conn,
 		containerTags:  make(map[string][]string),
@@ -675,7 +675,7 @@ func TestStreamJsonWithLogstashTagsWithDefault(t *testing.T) {
 
 	conn := MockConn{}
 
-	adapter := LogstashAdapter{
+	adapter := Adapter{
 		route:          new(router.Route),
 		conn:           conn,
 		containerTags:  make(map[string][]string),
@@ -739,7 +739,7 @@ func TestStreamJsonWithLogstashFieldsAndBlacklist(t *testing.T) {
 
 	conn := MockConn{}
 
-	adapter := LogstashAdapter{
+	adapter := Adapter{
 		route:          new(router.Route),
 		conn:           conn,
 		containerTags:  make(map[string][]string),
@@ -808,7 +808,7 @@ func TestStreamJsonWithLogstashFieldsWithDefaultAndBlacklist(t *testing.T) {
 
 	conn := MockConn{}
 
-	adapter := LogstashAdapter{
+	adapter := Adapter{
 		route:          new(router.Route),
 		conn:           conn,
 		containerTags:  make(map[string][]string),
@@ -878,7 +878,7 @@ func TestStreamJsonLabelsDisabled(t *testing.T) {
 
 	conn := MockConn{}
 
-	adapter := LogstashAdapter{
+	adapter := Adapter{
 		route:          new(router.Route),
 		conn:           conn,
 		containerTags:  make(map[string][]string),
@@ -948,7 +948,7 @@ func TestStreamJsonLabelsEnabled(t *testing.T) {
 
 	conn := MockConn{}
 
-	adapter := LogstashAdapter{
+	adapter := Adapter{
 		route:          new(router.Route),
 		conn:           conn,
 		containerTags:  make(map[string][]string),
@@ -1025,7 +1025,7 @@ func TestStreamJsonLabelsEnabledButEmpty(t *testing.T) {
 
 	conn := MockConn{}
 
-	adapter := LogstashAdapter{
+	adapter := Adapter{
 		route:          new(router.Route),
 		conn:           conn,
 		containerTags:  make(map[string][]string),
